@@ -1,0 +1,75 @@
+server:
+    port: 8080
+    tomcat:
+        accesslog:
+            enabled: true # Enable access log.
+            directory: log # Directory in which log files are created. Can be relative to the tomcat base dir or absolute.
+#           pattern: common # Format pattern for access logs.
+            # Format pattern for access logs:
+            # https://tomcat.apache.org/tomcat-8.0-doc/config/valve.html#Access_Log_Valve
+            pattern: '%h %l %u %t "%r" %s %b %D'
+
+            # Log file name suffix:
+            suffix: .log
+    undertow:
+#        ioThreads: 15
+#        workerThreads: 150
+        accesslog:
+            enabled: true
+            dir: log
+            pattern: combined
+    compression:
+        enabled: true
+        mimeTypes: text/xml, text/css, text/html, application/json
+        minResponseSize: 4096
+
+spring:
+    application:
+    name: spring-boot-pdf
+
+#security
+security.user:
+          name: omrpdf
+          password: omrpdf123
+
+#Spring Boot Admin Client
+#spring.boot.admin:
+#              url: http://localhost:8090
+#              username: omradmin
+#              password: tac_2014
+#              client:
+#                  name : generatePDF
+#                  enable : true
+
+#spring.boot.admin:
+#  url: http://localhost:8090
+#  username: omradmin
+#  password: tac_2014
+#  client:
+#    name: generatePDF
+#    metadata:
+#      user.name: ${security.user.name}
+#      user.password: ${security.user.password}
+
+management.security.enabled: false
+
+jackson.default-property-inclusion: non_null
+
+management:
+  security:
+    enabled: false
+  endpoint:
+    prometheus:
+      id: micrometheus
+    metrics:
+      enabled: true
+    web:
+      exposure:
+        include: health,prometheus,info,metrics,threaddump
+  prometheus:
+    enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+

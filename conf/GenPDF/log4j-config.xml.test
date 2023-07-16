@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+   <appender name="TRANTX" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="${user.home}/log/GenPDF/genPDF_tran.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANERR" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="${user.home}/log/GenPDF/genPDF_error.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANDEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="${user.home}/log/GenPDF/genPDF_debug.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <category name="TRAN_TX">
+          <priority value="INFO" />
+          <appender-ref ref="TRANTX"/>
+   </category>
+   <category name="TRAN_DEBUG">
+          <priority value="INFO" />
+          <appender-ref ref="TRANDEBUG"/>
+   </category>
+   <category name="TRAN_ERROR">
+          <priority value="INFO" />
+          <appender-ref ref="TRANERR"/>
+   </category>
+
+
+   <root>
+         <level value="INFO"/>
+   </root>
+
+</log4j:configuration>

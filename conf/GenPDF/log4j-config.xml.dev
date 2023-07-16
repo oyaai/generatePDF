@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+   <appender name="TRANTX" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_tran.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANERR" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_error.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANDEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_debug.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+         </layout>
+   </appender>
+
+    <appender name="access" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/access.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d - %m%n"/>
+         </layout>
+   </appender>
+
+    <appender name="server" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/server.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d - %m%n"/>
+         </layout>
+   </appender>
+
+       <!-- console appender -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelMatchFilter">
+            <param name="LevelToMatch" value="INFO" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+        <filter class="org.apache.log4j.varia.DenyAllFilter"/>
+    </appender>
+
+   <category name="TRAN_TX" additivity="false">
+          <priority value="DEBUG" />
+          <appender-ref ref="TRANTX"/>
+   </category>
+
+   <category name="TRAN_ERROR">
+          <priority value="DEBUG" />
+          <appender-ref ref="TRANERR"/>
+   </category>
+
+    <logger name="th.co.tac.report" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="TRANDEBUG" />
+    </logger>
+
+
+    <logger name="th.co.dtn.omr" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="TRANDEBUG" />
+    </logger>
+
+    <logger name="io.vertx" additivity="false">
+        <level value="INFO" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="io.vertx.ext.web.handler.impl.LoggerHandlerImpl" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="access" />
+    </logger>
+
+    <logger name="th.co.dtn.omr.RestServer" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="server" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <root>
+        <priority value="DEBUG" />
+        <appender-ref ref="console" />
+    </root>
+
+
+</log4j:configuration>

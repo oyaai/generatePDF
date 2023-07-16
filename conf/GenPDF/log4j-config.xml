@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+   <appender name="TRANTX" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_${HOSTNAME}_tran.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANERR" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_${HOSTNAME}_error.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d|%m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="TRANDEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/genPDF_${HOSTNAME}_debug.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n"/>
+         </layout>
+   </appender>
+
+   <appender name="access" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/access_${HOSTNAME}.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d - %m%n"/>
+         </layout>
+   </appender>
+
+    <appender name="server" class="org.apache.log4j.DailyRollingFileAppender">
+         <param name="DatePattern" value="'.'yyyy-MM-dd" />
+         <param name="file" value="./log/server_${HOSTNAME}.log"/>
+         <layout class="org.apache.log4j.PatternLayout">
+                  <param name="ConversionPattern" value="%d - %m%n"/>
+         </layout>
+   </appender>
+
+    <!-- console appender -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{1} - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelMatchFilter">
+            <param name="LevelToMatch" value="INFO" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+        <filter class="org.apache.log4j.varia.DenyAllFilter"/>
+    </appender>
+
+   <category name="TRAN_TX">
+          <priority value="DEBUG" />
+          <appender-ref ref="console" />
+          <appender-ref ref="TRANTX"/>
+   </category>
+   <!--<category name="th.co.dtn.omr">-->
+          <!--<priority value="DEBUG" />-->
+          <!--<appender-ref ref="TRANDEBUG"/>-->
+   <!--</category>-->
+    <!--<category name="th.co.tac.report">-->
+        <!--<priority value="DEBUG" />-->
+        <!--<appender-ref ref="TRANDEBUG"/>-->
+    <!--</category>-->
+   <category name="TRAN_ERROR">
+          <priority value="DEBUG" />
+          <appender-ref ref="console" />
+          <appender-ref ref="TRANERR"/>
+   </category>
+
+    <logger name="th.co.tac.report" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="console" />
+        <appender-ref ref="TRANDEBUG" />
+    </logger>
+
+
+    <logger name="th.co.dtn.omr" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="TRANDEBUG" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="org.springframework" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="access" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="org.springframework.data" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="access" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <root>
+        <priority value="DEBUG" />
+        <appender-ref ref="console" />
+    </root>
+
+
+</log4j:configuration>
