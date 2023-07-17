@@ -5,7 +5,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.*;
-import org.slf4j.Logger;
+//import org.slf4j.Logger;
 import com.crm.generatePDF.report.Attachment;
 import com.crm.generatePDF.report.Image;
 import com.crm.generatePDF.report.ReportDocument;
@@ -14,10 +14,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-import static org.slf4j.LoggerFactory.getLogger;
+//import static org.slf4j.LoggerFactory.getLogger;
 
 public class PdfDocument implements ReportDocument, Attachment {
-    private final Logger log = getLogger(PdfDocument.class);
+    //private final Logger log = getLogger(PdfDocument.class);
     private String fontPath;
     private int fontSize;
     private byte[] pdfBytes;

@@ -5,9 +5,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.crm.generatePDF.report.*;
+//import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,7 +25,7 @@ import java.util.stream.Collector;
 public class PDFBuilder {
     private final int imageDPI = 90;
 
-    private final Logger logger = LoggerFactory.getLogger(PDFBuilder.class);
+    //private final Logger logger = LoggerFactory.getLogger(PDFBuilder.class);
     private final ReportDocument reportDocument;
     private ConfigReportContext configContext;
 
@@ -219,8 +218,16 @@ public class PDFBuilder {
                 .toArray(it -> new Image[it]);
     }
 
+    private void log(String format, long start) {
+    }
 
-    private void log(String msg,long startTime){
+    private void debug(String format, long start) {
+    }
+
+    private void warring(String format, long start) {
+    }
+
+/*     private void log(String msg,long startTime){
         logger.info(messageFormat(msg, startTime));
     }
     private void warring(String msg,long startTime){
@@ -228,7 +235,7 @@ public class PDFBuilder {
     }
     private void debug(String msg, long startTime ){
         logger.debug(messageFormat(msg, startTime));
-    }
+    } */
 
     private String messageFormat(String msg, long startTime){
         return String.format("%s|-- %s|%d ms.",configContext.getDocumentName(),msg ,(System.currentTimeMillis() - startTime));
