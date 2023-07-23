@@ -1,14 +1,5 @@
 package com.crm.generatePDF.report.pdf;
 
-import com.itextpdf.text.BadElementException;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
-import org.codehaus.jackson.map.ObjectMapper;
-import com.crm.generatePDF.report.*;
-//import org.slf4j.Logger;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -19,13 +10,35 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collector;
+
+import javax.imageio.ImageIO;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.crm.generatePDF.report.Attachment;
+import com.crm.generatePDF.report.AttachmentAdder;
+import com.crm.generatePDF.report.AttachmentAdderImp;
+import com.crm.generatePDF.report.Image;
+import com.crm.generatePDF.report.Position;
+import com.crm.generatePDF.report.ReportDocument;
+import com.itextpdf.text.BadElementException;
 
 public class PDFBuilder {
     private final int imageDPI = 90;
 
-    //private final Logger logger = LoggerFactory.getLogger(PDFBuilder.class);
+    private final Logger logger = LoggerFactory.getLogger(PDFBuilder.class);
     private final ReportDocument reportDocument;
     private ConfigReportContext configContext;
 
@@ -218,16 +231,7 @@ public class PDFBuilder {
                 .toArray(it -> new Image[it]);
     }
 
-    private void log(String format, long start) {
-    }
-
-    private void debug(String format, long start) {
-    }
-
-    private void warring(String format, long start) {
-    }
-
-/*     private void log(String msg,long startTime){
+    private void log(String msg,long startTime){
         logger.info(messageFormat(msg, startTime));
     }
     private void warring(String msg,long startTime){
@@ -235,7 +239,7 @@ public class PDFBuilder {
     }
     private void debug(String msg, long startTime ){
         logger.debug(messageFormat(msg, startTime));
-    } */
+    }
 
     private String messageFormat(String msg, long startTime){
         return String.format("%s|-- %s|%d ms.",configContext.getDocumentName(),msg ,(System.currentTimeMillis() - startTime));
