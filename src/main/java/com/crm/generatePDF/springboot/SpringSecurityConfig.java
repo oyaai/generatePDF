@@ -1,16 +1,16 @@
 package com.crm.generatePDF.springboot;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+public class SpringSecurityConfig extends WebSecurityConfiguration {
 
-
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic();
-    }
-
+       // http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic();
+        
+    }*/
 }
